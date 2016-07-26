@@ -1383,6 +1383,7 @@
                         <outlet property="deleteButton" destination="AFs-I4-dNS" id="MN6-5N-wuT"/>
                         <outlet property="descriptionView" destination="B9t-Cj-n9y" id="vMg-WU-8OV"/>
                         <outlet property="doneButton" destination="jc1-i4-MzX" id="qsT-4W-k4j"/>
+                        <outlet property="flipButton" destination="B9t-Cj-n9y" id="zGw-NO-IbW"/>
                         <outlet property="genre" destination="srh-fG-PPg" id="q2F-bK-AKw"/>
                         <outlet property="imageView" destination="JHV-JW-s2L" id="J3N-xK-TgD"/>
                         <outlet property="pageControl" destination="e3M-AC-fMY" id="7lH-hA-lS7"/>

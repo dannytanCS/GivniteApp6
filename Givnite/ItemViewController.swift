@@ -60,6 +60,7 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     //book info
     @IBOutlet weak var descriptionView: UIView!
     
+    @IBOutlet weak var flipButton: UIView!
     @IBOutlet weak var bookTitle: UILabel!
     @IBOutlet weak var bookAuthor: UILabel!
     @IBOutlet weak var publisher: UILabel!
@@ -121,6 +122,8 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         self.btnbtn.hidden = true
         
         
+        self.flipButton.hidden = true
+        
         if otherUser {
             settingButton.hidden = true
             cameraButton.hidden = true
@@ -130,7 +133,7 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
                 self.btnbtn.hidden = true
             }
         }
-     
+        
         
         
         var swipeRight = UISwipeGestureRecognizer(target: self, action: "swiped:") // put : at the end of method name
@@ -232,6 +235,13 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         databaseRef.child("marketplace").child(imageName!).observeSingleEventOfType(.Value, withBlock: { (snapshot)
             in
             
+            
+            //checks for isbn
+            
+            if let isbn = snapshot.value!["isbn"] as? String {
+                self.flipButton.hidden = false
+            }
+            
             // Get item information
             if let searchable = snapshot.value!["searchable"] as? NSDictionary {
                 if let bookName = searchable["book name"] as? String {
@@ -260,7 +270,7 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
                 if let description = searchable["description2"] as? String {
                     self.bookDescription2.text = description
                 }
-                
+
                 
             }
             
