@@ -1278,7 +1278,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Genre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oAV-SB-Mrr">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Genre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oAV-SB-Mrr" userLabel="Category">
                                         <rect key="frame" x="16" y="154" width="47" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1383,7 +1383,7 @@
                         <outlet property="deleteButton" destination="AFs-I4-dNS" id="MN6-5N-wuT"/>
                         <outlet property="descriptionView" destination="B9t-Cj-n9y" id="vMg-WU-8OV"/>
                         <outlet property="doneButton" destination="jc1-i4-MzX" id="qsT-4W-k4j"/>
-                        <outlet property="flipButton" destination="B9t-Cj-n9y" id="zGw-NO-IbW"/>
+                        <outlet property="flipButton" destination="lMB-pF-IpE" id="u5g-eT-mpg"/>
                         <outlet property="genre" destination="srh-fG-PPg" id="q2F-bK-AKw"/>
                         <outlet property="imageView" destination="JHV-JW-s2L" id="J3N-xK-TgD"/>
                         <outlet property="pageControl" destination="e3M-AC-fMY" id="7lH-hA-lS7"/>
@@ -1734,6 +1734,99 @@
                                     <action selector="startNewChat:" destination="Tnf-I5-fWN" eventType="touchUpInside" id="kot-Qn-HOf"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ak-Fm-vyC">
+                                <rect key="frame" x="33" y="91" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="showInfo:" destination="Tnf-I5-fWN" eventType="touchUpInside" id="lOp-tN-Fti"/>
+                                </connections>
+                            </button>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xkN-qp-hNU" userLabel="Description View">
+                                <rect key="frame" x="33" y="91" width="308" height="308"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dqm-3v-Isu">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <state key="normal" title="Button" image="Quit Button"/>
+                                        <connections>
+                                            <action selector="cancelInfo:" destination="Tnf-I5-fWN" eventType="touchUpInside" id="nqL-bg-K0l"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Jd-5J-mFB">
+                                        <rect key="frame" x="83" y="67" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="016-uk-xca">
+                                        <rect key="frame" x="83" y="38" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Publisher" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oR0-qd-5Vg">
+                                        <rect key="frame" x="3" y="96" width="72" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XhD-3q-Wzo">
+                                        <rect key="frame" x="41" y="38" width="34" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mDh-hP-HAf">
+                                        <rect key="frame" x="80" y="180" width="240" height="128"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkK-2N-uur">
+                                        <rect key="frame" x="39" y="125" width="36" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Genre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rww-Kd-lph" userLabel="Category">
+                                        <rect key="frame" x="28" y="154" width="47" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rX-pn-o6C">
+                                        <rect key="frame" x="23" y="67" width="52" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSl-ln-tHA">
+                                        <rect key="frame" x="83" y="154" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOU-go-WRD">
+                                        <rect key="frame" x="83" y="96" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoJ-Lx-Ixt">
+                                        <rect key="frame" x="83" y="125" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hma-Wx-TZc">
+                                        <rect key="frame" x="-13" y="183" width="88" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1766,12 +1859,20 @@
                     <navigationItem key="navigationItem" id="nYD-uH-PUB"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="bookAuthor" destination="6Jd-5J-mFB" id="JDW-3O-70L"/>
                         <outlet property="bookDescription" destination="fCI-ZS-6Zx" id="EjN-g1-qw9"/>
+                        <outlet property="bookDescription2" destination="mDh-hP-HAf" id="U27-yD-IWv"/>
                         <outlet property="bookName" destination="9z7-5X-Bho" id="Ldf-XF-nVa"/>
                         <outlet property="bookPrice" destination="ipS-LB-qwy" id="TzK-z1-0pk"/>
+                        <outlet property="bookTitle" destination="016-uk-xca" id="AI6-JK-RvZ"/>
+                        <outlet property="descriptionView" destination="xkN-qp-hNU" id="FBs-O5-DA6"/>
+                        <outlet property="flipButton" destination="9ak-Fm-vyC" id="oMA-Rs-PBx"/>
+                        <outlet property="genre" destination="oSl-ln-tHA" id="zdo-ZY-FVf"/>
                         <outlet property="imageView" destination="78V-b6-JGw" id="i8W-Jd-Zo2"/>
                         <outlet property="messageButton" destination="rKm-p3-FHc" id="gnG-Wm-E8e"/>
                         <outlet property="pageControl" destination="Avh-1M-Vks" id="Lrw-0W-bdI"/>
+                        <outlet property="publishedDate" destination="eoJ-Lx-Ixt" id="pI7-kR-rse"/>
+                        <outlet property="publisher" destination="qOU-go-WRD" id="qzw-XV-T9L"/>
                         <outlet property="sellerName" destination="5gs-Dx-HK3" id="ocg-RU-h5U"/>
                         <segue destination="LEm-Wi-zgq" kind="modal" identifier="shortCutChat" id="Ldv-4t-Rae"/>
                         <segue destination="WKj-cM-742" kind="custom" identifier="toProfile" customClass="RightToLeft" customModule="Givnite" customModuleProvider="target" id="rF6-7x-mK6"/>
@@ -1825,10 +1926,10 @@
         <image name="Trash" width="81" height="84"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4FE-Dr-Dr8"/>
-        <segue reference="4Fk-YX-ieg"/>
-        <segue reference="hwb-wp-hml"/>
-        <segue reference="Nm1-oM-csR"/>
+        <segue reference="rF6-7x-mK6"/>
+        <segue reference="YfD-1C-9gm"/>
+        <segue reference="qG4-99-uBB"/>
+        <segue reference="Ldv-4t-Rae"/>
         <segue reference="Mgg-ae-R6I"/>
     </inferredMetricsTieBreakers>
 </document>

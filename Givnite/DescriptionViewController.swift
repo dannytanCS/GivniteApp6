@@ -311,7 +311,6 @@ class DescriptionViewController: UIViewController, UITextFieldDelegate, UITextVi
                 if let code = itemDictionary["isbn"] as? String {
                     print(123123)
                     if let searchable = itemDictionary["searchable"] as? NSDictionary {
-                         print(123123)
                         if let bookName = searchable["title2"] as? String {
                             self.bookName.text = bookName
                         }

@@ -22,6 +22,17 @@ class MarketItemViewController: UIViewController {
     @IBOutlet weak var messageButton: SpringButton!
     
     
+    //isbn 
+    
+    @IBOutlet weak var flipButton: UIButton!
+    @IBOutlet weak var descriptionView: UIView!
+    
+    @IBOutlet weak var bookTitle: UILabel!
+    @IBOutlet weak var bookAuthor: UILabel!
+    @IBOutlet weak var publisher: UILabel!
+    @IBOutlet weak var publishedDate: UILabel!
+    @IBOutlet weak var genre: UILabel!
+    @IBOutlet weak var bookDescription2: UITextView!
     
     
     let storageRef = FIRStorage.storage().referenceForURL("gs://givniteapp.appspot.com")
@@ -71,6 +82,21 @@ class MarketItemViewController: UIViewController {
         messageButton.animate()
     }
     
+    
+    @IBAction func showInfo(sender: AnyObject) {
+        
+        self.descriptionView.hidden = false
+        
+    }
+    
+    
+    @IBAction func cancelInfo(sender: AnyObject) {
+        
+        self.descriptionView.hidden = true
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -79,6 +105,7 @@ class MarketItemViewController: UIViewController {
             messageButton.hidden = true
         }
         
+        self.flipButton.hidden = true
   
         self.imageView.layer.cornerRadius = 10
         self.imageView.clipsToBounds = true
@@ -102,9 +129,42 @@ class MarketItemViewController: UIViewController {
         databaseRef.child("marketplace").child(imageName!).observeSingleEventOfType(.Value, withBlock: { (snapshot)
             in
             
-            if let bookDescription = snapshot.value!["description"] as? String {
-                self.bookDescription.text = bookDescription
+            //checks for isbn
+            
+            if let isbn = snapshot.value!["isbn"] as? String {
+                self.flipButton.hidden = false
             }
+            
+            if let searchable = snapshot.value!["searchable"] as? NSDictionary {
+                if let bookDescription = searchable["description"] as? String {
+                    self.bookDescription.text = bookDescription
+                }
+                if let title = searchable["title2"] as? String {
+                    self.bookTitle.text = title
+                }
+                if let author = searchable["author"] as? String {
+                    self.bookAuthor.text = author
+                }
+                
+                if let publisher = searchable["publisher"] as? String {
+                    self.publisher.text = publisher
+                }
+                
+                if let publishedDate = searchable["publishedDate"] as? String {
+                    self.publishedDate.text = publishedDate
+                }
+                if let genre = searchable["categories"] as? String {
+                    self.genre.text = genre
+                }
+                if let description = searchable["description2"] as? String {
+                    self.bookDescription2.text = description
+                }
+                
+                
+            }
+                
+
+            
             
             
             let itemDictionary = snapshot.value!["images"] as! NSDictionary
@@ -255,8 +315,6 @@ class MarketItemViewController: UIViewController {
         //NOTE this should be like otherUserId = self.otherUserId ( should be easily accesible if you are already showing the item by the user )
         let otherUserId = self.userID
         let otherUsername = self.sellerName.text
-        
-        print(otherUserId)
         
         
         //IGNORE THE FOLLOWING COMMENTS

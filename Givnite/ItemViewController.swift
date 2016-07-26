@@ -60,7 +60,8 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     //book info
     @IBOutlet weak var descriptionView: UIView!
     
-    @IBOutlet weak var flipButton: UIView!
+    @IBOutlet weak var flipButton: UIButton!
+
     @IBOutlet weak var bookTitle: UILabel!
     @IBOutlet weak var bookAuthor: UILabel!
     @IBOutlet weak var publisher: UILabel!
