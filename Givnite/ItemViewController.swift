@@ -243,7 +243,23 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
                 if let title = searchable["title2"] as? String {
                     self.bookTitle.text = title
                 }
+                if let author = searchable["author"] as? String {
+                    self.bookAuthor.text = author
+                }
                 
+                if let publisher = searchable["publisher"] as? String {
+                    self.publisher.text = publisher
+                }
+                
+                if let publishedDate = searchable["publishedDate"] as? String {
+                    self.publishedDate.text = publishedDate
+                }
+                if let genre = searchable["categories"] as? String {
+                    self.genre.text = genre
+                }
+                if let description = searchable["description2"] as? String {
+                    self.bookDescription2.text = description
+                }
                 
                 
             }
