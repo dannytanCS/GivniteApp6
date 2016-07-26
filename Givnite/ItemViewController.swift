@@ -111,7 +111,8 @@ class ItemViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         self.bookDescription.editable = false
         self.bookPrice.userInteractionEnabled = false
         self.bookName.userInteractionEnabled = false
-        
+        self.descriptionView.hidden = true
+
         self.imageView.image = self.image
         self.imageView.layer.cornerRadius = 10
         self.imageView.clipsToBounds = true

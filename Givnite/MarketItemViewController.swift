@@ -116,6 +116,8 @@ class MarketItemViewController: UIViewController {
         self.bookPrice.text = self.price
         self.bookDescription.text = self.bkdescription
         self.bookDescription.editable = false
+        self.descriptionView.hidden = true
+
         
         
         databaseRef.child("user").child(userID!).child("name").observeSingleEventOfType(.Value, withBlock: { (snapshot)
