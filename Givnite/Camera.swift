@@ -34,6 +34,7 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
 
 
     
+    @IBOutlet weak var takePhotoButton: UIButton!
     @IBOutlet weak var photoLibraryButton: UIButton!
     
     //goes to library
@@ -119,8 +120,8 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         self.imageTaken = image!
         self.image = image!
-        self.findsISBN()
         self.dismissViewControllerAnimated(true, completion: nil)
+        addImageToFirebase()
     }
     
     
@@ -130,7 +131,8 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     var ISBN:String?
     
     func findsISBN(){
-        
+        self.takePhotoButton.hidden = true
+        self.skipButton.hidden = false
         self.scanLabel.hidden = false
         let metadataOutput = AVCaptureMetadataOutput()
         
@@ -202,15 +204,11 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     }
     
     
+    @IBOutlet weak var skipButton: UIButton!
     
-    
-    
-    
-    @IBAction func doneButtonClicked(sender: AnyObject) {
-    
+    @IBAction func skipAction(sender: AnyObject) {
+        addImageToFirebase()
     }
-    
-    
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -235,7 +233,7 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        previewLayer!.frame  = imageView.bounds
+        //previewLayer!.frame  = imageView.bounds
         
     }
     
