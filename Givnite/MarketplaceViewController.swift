@@ -31,6 +31,8 @@ class MarketplaceViewController: UIViewController, UICollectionViewDelegate, UIC
     var userArray = [String]()
     var descriptionArray = [String]()
     
+    var refreshControl: UIRefreshControl!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,17 +41,7 @@ class MarketplaceViewController: UIViewController, UICollectionViewDelegate, UIC
             imageNameArray = array
         }
         
-        print(imageNameArray)
-
-        self.imageArray.removeAll()
-
-        
-        
-        self.userArray.removeAll()
-        self.bookNameArray.removeAll()
-        self.bookPriceArray.removeAll()
-        self.descriptionArray.removeAll()
-        
+        refreshControlFunc()
         
         loadImages()
         
@@ -70,6 +62,42 @@ class MarketplaceViewController: UIViewController, UICollectionViewDelegate, UIC
 
     }
     
+    
+    //refresh control
+    
+    func refreshControlFunc() {
+        
+        refreshControl = UIRefreshControl()
+        collectionView.alwaysBounceVertical = true
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing")
+        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        collectionView.addSubview(refreshControl)
+        
+    }
+    
+    //refresh 
+    func refresh(sender:AnyObject)
+    {
+        NSCache.sharedInstance.removeObjectForKey("imageNameArray")
+        imageNameArray.removeAll()
+        // Updating your data here...
+
+        loadImages()
+        self.refreshControl?.endRefreshing()
+    }
+    
+    
+    //clear everything
+    
+    func clear() {
+        
+        self.imageArray.removeAll()
+        
+        self.userArray.removeAll()
+        self.bookNameArray.removeAll()
+        self.bookPriceArray.removeAll()
+        self.descriptionArray.removeAll()
+    }
     
     
     
@@ -135,6 +163,9 @@ class MarketplaceViewController: UIViewController, UICollectionViewDelegate, UIC
 
     
     func loadImages() {
+        
+        clear()
+        
         dataRef.child("marketplace").observeSingleEventOfType(.Value, withBlock: { (snapshot)
             in
             
@@ -147,7 +178,7 @@ class MarketplaceViewController: UIViewController, UICollectionViewDelegate, UIC
                     //adds image name from firebase database to an array
             
                 else {
-                
+                    
                     if self.imageNameArray.count == 0{
                    
                         var timeArray = [Int]()
@@ -305,6 +336,7 @@ class MarketplaceViewController: UIViewController, UICollectionViewDelegate, UIC
                             NSCache.sharedInstance.setObject(imageToCache!, forKey: imageName)
                             dispatch_async(dispatch_get_main_queue(),{
                                 cell.itemImageView.image = imageToCache
+                                print(self.imageArray)
                                 self.imageArray[indexPath.row] = imageToCache!
                                 
                             })
@@ -456,5 +488,10 @@ class MarketplaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     }
     
-        
 }
+
+
+
+    
+    
+
