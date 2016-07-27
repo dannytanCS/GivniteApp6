@@ -63,29 +63,65 @@ class MarketplaceViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < -200 {
+            scrollView.contentOffset = CGPointMake(0, -200)
+        }
+    }
+
+    
     //refresh control
     
     func refreshControlFunc() {
         
         refreshControl = UIRefreshControl()
+        refreshControl.bounds = CGRectMake(0, -5, refreshControl.bounds.size.width, refreshControl.bounds.size.height)
         collectionView.alwaysBounceVertical = true
-        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing")
-        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing!")
+        refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.addSubview(refreshControl)
+        collectionView.scrollEnabled = (collectionView.contentSize.height <= CGRectGetHeight(collectionView.frame));
         
-    }
+        
+        }
+    
+
+    
+    
+  
+    
+    
     
     //refresh 
-    func refresh(sender:AnyObject)
-    {
+//    func refresh()
+//    {
+//        NSCache.sharedInstance.removeObjectForKey("imageNameArray")
+//        imageNameArray.removeAll()
+//        // Updating your data here...
+//
+//        loadImages()
+//        self.refreshControl?.endRefreshing()
+//    }
+    
+    
+    func refresh(){
+        
         NSCache.sharedInstance.removeObjectForKey("imageNameArray")
         imageNameArray.removeAll()
-        // Updating your data here...
-
-        loadImages()
-        self.refreshControl?.endRefreshing()
+           // Updating your data here...
+        
+            loadImages()
+        
+        // -- DO SOMETHING AWESOME (... or just wait 3 seconds) --
+        // This is where you'll make requests to an API, reload data, or process information
+        var delayInSeconds = 2.0;
+        var popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)));
+        dispatch_after(popTime, dispatch_get_main_queue()) { () -> Void in
+            // When done requesting/reloading/processing invoke endRefreshing, to close the control
+            self.refreshControl!.endRefreshing()
+        }
+        // -- FINISHED SOMETHING AWESOME, WOO! --
     }
-    
     
     //clear everything
     
@@ -310,113 +346,115 @@ class MarketplaceViewController: UIViewController, UICollectionViewDelegate, UIC
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as!
         MarketCollectionViewCell
         
-        
-        if let imageName = self.imageNameArray[indexPath.row] as? String {
-            cell.itemImageView.image = nil
-            
-           
-            if let image = NSCache.sharedInstance.objectForKey(imageName) as? UIImage {
-                cell.itemImageView.image = image
-                if imageArray.count > indexPath.row {
-                    self.imageArray[indexPath.row] = image
-                }
-            }
+        if imageArray.count > indexPath.row {
+            if let imageName = self.imageNameArray[indexPath.row] as? String {
+                cell.itemImageView.image = nil
                 
-            else {
-                
-                var imagesRef = storageRef.child(imageName).child("\(imageName).jpg")
-                //sets the image on profile
-                imagesRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
-                    if (error != nil) {
-                        print ("File does not exist")
-                        return
-                    } else {
-                        if (data != nil){
-                            let imageToCache = UIImage(data:data!)
-                            NSCache.sharedInstance.setObject(imageToCache!, forKey: imageName)
-                            dispatch_async(dispatch_get_main_queue(),{
-                                cell.itemImageView.image = imageToCache
-                                print(self.imageArray)
-                                self.imageArray[indexPath.row] = imageToCache!
-                                
-                            })
-                        }
+               
+                if let image = NSCache.sharedInstance.objectForKey(imageName) as? UIImage {
+                    cell.itemImageView.image = image
+                    if imageArray.count > indexPath.row {
+                        self.imageArray[indexPath.row] = image
                     }
-                    }.resume()
-                
-            }
-            
-            
-            if userArray.count > indexPath.row {
-                
-                let userID = userArray[indexPath.row]
-                cell.profileImageButton.layer.cornerRadius =  cell.profileImageButton.bounds.size.width/2
-                cell.profileImageButton.clipsToBounds = true
-                
-                
-                if let userImage = NSCache.sharedInstance.objectForKey(userID) as? UIImage {
-                    
-                    cell.profileImageButton.setImage(userImage, forState: .Normal)
                 }
                     
                 else {
                     
-                    
-                    var profilePicRef = storageRef.child(userID).child("profile_pic.jpg")
-                    
-                    
+                    var imagesRef = storageRef.child(imageName).child("\(imageName).jpg")
                     //sets the image on profile
-                    profilePicRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
+                    imagesRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
                         if (error != nil) {
                             print ("File does not exist")
-                            
                             return
                         } else {
                             if (data != nil){
                                 let imageToCache = UIImage(data:data!)
-                                NSCache.sharedInstance.setObject(imageToCache!, forKey: userID)
+                                NSCache.sharedInstance.setObject(imageToCache!, forKey: imageName)
                                 dispatch_async(dispatch_get_main_queue(),{
-                                    cell.profileImageButton.setImage(imageToCache!, forState: .Normal)
+                                    cell.itemImageView.image = imageToCache
+                                    print(self.imageArray)
+                                    if self.imageArray.count > indexPath.row {
+                                        self.imageArray[indexPath.row] = imageToCache!
+                                    }
                                 })
-                                
                             }
                         }
                         }.resume()
+                    
                 }
-            }
-            if let bookName = bookCache[imageName] {
-                cell.bookName.text = bookName
-            
-            }
-            
-            
-            else {
-                if bookNameArray.count > indexPath.row {
-                    let bookNameToCache = bookNameArray[indexPath.row]
-                    self.bookCache[imageName] = bookNameToCache
-                    cell.bookName.text = bookNameToCache
+                
+                
+                if userArray.count > indexPath.row {
+                    
+                    let userID = userArray[indexPath.row]
+                    cell.profileImageButton.layer.cornerRadius =  cell.profileImageButton.bounds.size.width/2
+                    cell.profileImageButton.clipsToBounds = true
+                    
+                    
+                    if let userImage = NSCache.sharedInstance.objectForKey(userID) as? UIImage {
+                        
+                        cell.profileImageButton.setImage(userImage, forState: .Normal)
+                    }
+                        
+                    else {
+                        
+                        
+                        var profilePicRef = storageRef.child(userID).child("profile_pic.jpg")
+                        
+                        
+                        //sets the image on profile
+                        profilePicRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
+                            if (error != nil) {
+                                print ("File does not exist")
+                                
+                                return
+                            } else {
+                                if (data != nil){
+                                    let imageToCache = UIImage(data:data!)
+                                    NSCache.sharedInstance.setObject(imageToCache!, forKey: userID)
+                                    dispatch_async(dispatch_get_main_queue(),{
+                                        cell.profileImageButton.setImage(imageToCache!, forState: .Normal)
+                                    })
+                                    
+                                }
+                            }
+                            }.resume()
+                    }
                 }
-            }
-            
-            if let bookPrice = priceCache[imageName] {
-                cell.bookPrice.text = bookPrice
-            }
-            
-            else {
-                if bookPriceArray.count > indexPath.row {
-                    let bookPriceToCache = bookPriceArray[indexPath.row]
-                    self.priceCache[imageName] = bookPriceToCache
-                    cell.bookPrice.text = bookPriceToCache
+                if let bookName = bookCache[imageName] {
+                    cell.bookName.text = bookName
+                
                 }
+                
+                
+                else {
+                    if bookNameArray.count > indexPath.row {
+                        let bookNameToCache = bookNameArray[indexPath.row]
+                        self.bookCache[imageName] = bookNameToCache
+                        cell.bookName.text = bookNameToCache
+                    }
+                }
+                
+                if let bookPrice = priceCache[imageName] {
+                    cell.bookPrice.text = bookPrice
+                }
+                
+                else {
+                    if bookPriceArray.count > indexPath.row {
+                        let bookPriceToCache = bookPriceArray[indexPath.row]
+                        self.priceCache[imageName] = bookPriceToCache
+                        cell.bookPrice.text = bookPriceToCache
+                    }
+                }
+
             }
- 
         }
         
         
         cell.profileImageButton.addTarget(self, action: #selector(self.buttonClicked), forControlEvents: .TouchUpInside)
         return cell
     }
-    
+
     
     
     

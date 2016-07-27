@@ -934,7 +934,7 @@
                                     <string>Title</string>
                                 </scopeButtonTitles>
                             </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jiq-Ob-Tbp">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jiq-Ob-Tbp">
                                 <rect key="frame" x="0.0" y="64" width="383" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="0.0" id="8Kv-2W-xkC">
@@ -1926,10 +1926,10 @@
         <image name="Trash" width="81" height="84"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Mgg-ae-R6I"/>
-        <segue reference="4FE-Dr-Dr8"/>
         <segue reference="VtU-44-gMG"/>
+        <segue reference="4FE-Dr-Dr8"/>
+        <segue reference="YfD-1C-9gm"/>
         <segue reference="yDE-RF-xni"/>
-        <segue reference="Nm1-oM-csR"/>
+        <segue reference="Mgg-ae-R6I"/>
     </inferredMetricsTieBreakers>
 </document>
